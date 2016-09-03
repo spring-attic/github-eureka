@@ -5,7 +5,7 @@
 
 	<groupId>com.example.eureka</groupId>
 	<artifactId>github-eureka</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${version}</version>
 	<packaging>jar</packaging>
 
 	<name>github-analytics-eureka</name>
@@ -23,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud-bom.version>Camden.BUILD-SNAPSHOT</spring-cloud-bom.version>
+		<version>0.0.1-SNAPSHOT</version>
 	</properties>
 
 	<distributionManagement>
