@@ -26,7 +26,7 @@
 		<distribution.management.release.id>artifactory-local</distribution.management.release.id>
 		<distribution.management.release.url>http://localhost:8081/artifactory/libs-release-local</distribution.management.release.url>
 		<!-- KUBERNETES -->
-		<docker.image.prefix>mgrzejszczak</docker.image.prefix>
+		<docker.image.prefix>scpipelines</docker.image.prefix>
 		<docker.server.id>docker-repo</docker.server.id>
 		<docker.registry.url>hub.docker.com</docker.registry.url>
 	</properties>
