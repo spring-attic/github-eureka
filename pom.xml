@@ -73,37 +73,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.11</version>
-				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<baseImage>frolvlad/alpine-oraclejdk8:slim</baseImage>
-					<entryPoint>["sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -jar /${project.build.finalName}.jar"]</entryPoint>
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
-					<serverId>${docker.server.id}</serverId>
-					<imageTags>
-						<imageTag>${project.version}</imageTag>
-						<imageTag>latest</imageTag>
-					</imageTags>
-				</configuration>
-				<executions>
-					<execution>
-						<id>push-image</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>push</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -143,5 +112,49 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.spotify</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.4.11</version>
+						<configuration>
+							<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+							<baseImage>frolvlad/alpine-oraclejdk8:slim</baseImage>
+							<entryPoint>["sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -jar /${project.build.finalName}.jar"]</entryPoint>
+							<resources>
+								<resource>
+									<targetPath>/</targetPath>
+									<directory>${project.build.directory}</directory>
+									<include>${project.build.finalName}.jar</include>
+								</resource>
+							</resources>
+							<serverId>${docker.server.id}</serverId>
+							<imageTags>
+								<imageTag>${project.version}</imageTag>
+								<imageTag>latest</imageTag>
+							</imageTags>
+						</configuration>
+						<executions>
+							<execution>
+								<id>push-image</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>push</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
