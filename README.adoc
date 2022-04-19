@@ -1,3 +1,5 @@
+# github-eureka is no longer actively maintained by VMware, Inc.
+
 = GitHub Eureka
 
 The Eureka service used by the CI / CD pipeline
